@@ -8,9 +8,9 @@ class NombreComplexe{
      T imaginaire;
     public:
  //question 3:
- NombreComplexe()reel(0),imaginaire(0){};
- NombreComplexe(T re, T im):reel(re),imaginaire(im){};
- NombreComplexe( NombreComplexe const T &c){};
+ NombreComplexe()reel(0),imaginaire(0){}
+ NombreComplexe(T re, T im):reel(re),imaginaire(im){}
+ NombreComplexe( NombreComplexe const T &c){}
  //question 4:
  void afficher(){
  cout<<"le nombre complexe est :"<<endl;
