@@ -1,82 +1,84 @@
 #include <iostream>
-#include<typename T>
+#include <cmath>  
 using namespace std;
-//question 1:
-class NombreComplexe{
-    private:
-     T reel;
-     T imaginaire;
-    public:
- //question 3:
- NombreComplexe()reel(0),imaginaire(0){}
- NombreComplexe(T re, T im):reel(re),imaginaire(im){}
- NombreComplexe( NombreComplexe const T &c){}
- //question 4:
- void afficher(){
- cout<<"le nombre complexe est :"<<endl;
- if( imaginaire<0){
- cout<<reel<<"-"<<imaginaire<<"i"<<endl;
- }
-cout<<reel<<"+"<<imaginaire<<"i"<<endl;
- }
-//question 5:
-  NombreComplexe operator+(const NombreComplexe &c1){
-    T re= reel+c1.reel;
-    T im= imaginaire+c1.imaginaire;
-    return NombreComplexe(re,im);
-}
- // Surcharge de l'opérateur - (soustraction)
+
+// Question 1:
+template<typename T>
+class NombreComplexe {
+private:
+    T reel;
+    T imaginaire;
+
+public:
+    // Question 3:
+    NombreComplexe() : reel(0), imaginaire(0) {}  // Default constructor
+    NombreComplexe(T re, T im) : reel(re), imaginaire(im) {}  // Parameterized constructor
+    NombreComplexe(const NombreComplexe& c) : reel(c.reel), imaginaire(c.imaginaire) {}  // Copy constructor
+
+    // Question 4:
+    void afficher() const {
+        cout << "Le nombre complexe est : ";
+        if (imaginaire < 0) {
+            cout << reel << imaginaire << "i" << endl;
+        } else {
+            cout << reel << "+" << imaginaire << "i" << endl;
+        }
+    }
+
+    // Question 5:
+    NombreComplexe operator+(const NombreComplexe& c1) const {
+        T re = reel + c1.reel;
+        T im = imaginaire + c1.imaginaire;
+        return NombreComplexe(re, im);
+    }
+
+    // Overload - operator
     NombreComplexe operator-(const NombreComplexe& other) const {
         return NombreComplexe(reel - other.reel, imaginaire - other.imaginaire);
     }
 
-    // Surcharge de l'opérateur * (multiplication)
+    // Overload * operator
     NombreComplexe operator*(const NombreComplexe& other) const {
         T r = reel * other.reel - imaginaire * other.imaginaire;
         T i = reel * other.imaginaire + imaginaire * other.reel;
         return NombreComplexe(r, i);
     }
 
-    // Surcharge de l'opérateur / (division)
+    // Overload / operator
     NombreComplexe operator/(const NombreComplexe& other) const {
         T denom = other.reel * other.reel + other.imaginaire * other.imaginaire;
         T r = (reel * other.reel + imaginaire * other.imaginaire) / denom;
         T i = (imaginaire * other.reel - reel * other.imaginaire) / denom;
         return NombreComplexe(r, i);
     }
-    //question 6:
-    // Surcharge des opérateurs de comparaison ==
+
+    // Question 6:
     bool operator==(const NombreComplexe& other) const {
         return (reel == other.reel && imaginaire == other.imaginaire);
     }
 
-    // Surcharge des opérateurs de comparaison !=
     bool operator!=(const NombreComplexe& other) const {
         return !(*this == other);
     }
 
-    // Surcharge des opérateurs de comparaison <
     bool operator<(const NombreComplexe& other) const {
         return std::sqrt(reel * reel + imaginaire * imaginaire) < std::sqrt(other.reel * other.reel + other.imaginaire * other.imaginaire);
     }
 
-    // Surcharge des opérateurs de comparaison >
     bool operator>(const NombreComplexe& other) const {
         return other < *this;
     }
 
-    // Surcharge des opérateurs de comparaison <=
     bool operator<=(const NombreComplexe& other) const {
         return !(*this > other);
     }
 
-    // Surcharge des opérateurs de comparaison >=
     bool operator>=(const NombreComplexe& other) const {
         return !(*this < other);
     }
-
 };
-//question 7:
+
+// Question 7:
 int main() {
     // Création d'objets de type NombreComplexe<int>
     NombreComplexe<int> a(3, 4);
@@ -110,12 +112,12 @@ int main() {
     quotient.afficher();
 
     // Test des opérateurs de comparaison
-    cout << "a == b : " << (a == b ? "Vrai" : "Faux") << std::endl;
-    cout << "a != b : " << (a != b ? "Vrai" : "Faux") << std::endl;
-    cout << "a < b : " << (a < b ? "Vrai" : "Faux") << std::endl;
-    cout << "a > b : " << (a > b ? "Vrai" : "Faux") << std::endl;
-    cout << "a <= b : " << (a <= b ? "Vrai" : "Faux") << std::endl;
-    cout << "a >= b : " << (a >= b ? "Vrai" : "Faux") << std::endl;
+    cout << "a == b : " << (a == b ? "Vrai" : "Faux") << endl;
+    cout << "a != b : " << (a != b ? "Vrai" : "Faux") << endl;
+    cout << "a < b : " << (a < b ? "Vrai" : "Faux") << endl;
+    cout << "a > b : " << (a > b ? "Vrai" : "Faux") << endl;
+    cout << "a <= b : " << (a <= b ? "Vrai" : "Faux") << endl;
+    cout << "a >= b : " << (a >= b ? "Vrai" : "Faux") << endl;
 
     return 0;
 }
